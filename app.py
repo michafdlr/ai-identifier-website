@@ -2,16 +2,19 @@ import streamlit as st
 import requests
 
 '''
-# Classify text regarding if it is AI written or not
+# Identify if a text is AI written or not
 '''
 
 st.markdown('''
-Just put in the text
+This app is build to help you identify if a text is AI written or not.
+The minimum length of the text should be about 300 characters in order to give you a reliable prediction.
+
+The accuracy of the model is about 98.5% if you put in a text that is apropriately long.
 ''')
 
 '''## Put in the text you want to investigate:'''
 
-text_input = st.text_input('Text to analyze', 'This is a text that is way to short to identify reliably.')
+text_input = st.text_input('Text to analyze', 'This is a text that is way to short to identify reliably. You can make better predictions if you put in a text that is at least 300 characters long.')
 
 
 
