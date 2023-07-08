@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 '''
-# Thales AI Written Text Identifier
+# The AI Written Text Identifier
 '''
 
 st.markdown('''Identify whether a text is AI-generated. This app is built to help
