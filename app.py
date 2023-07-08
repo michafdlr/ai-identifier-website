@@ -7,14 +7,10 @@ import requests
 
 st.markdown('''Identify whether a text is AI-generated. This app is built to help
             you determine if a given text is written by a human or an AI language model.
+            :orange[*For reliable predictions, the minimum length of the text should be around 300 characters*].
+            The model accuracy is approximately 98.5% when analyzing sufficiently long texts.''')
 
-            For reliable predictions, the minimum length of the text should be around 300 characters.
-            The model accuracy is approximately 98.5% when analyzing sufficiently long texts.
-
-            Please enter the text you want to analyze:
-            ''')
-
-'''## Put in the text you want to investigate:'''
+'''## Please enter the text you want to analyze:'''
 
 text_input = st.text_area('Text to analyze', 'This is a text that is way to short to identify reliably. You can make better predictions if you put in a text that is at least 300 characters long.',
                           height=500
