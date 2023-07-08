@@ -7,8 +7,10 @@ import requests
 
 st.markdown('''Identify whether a text is AI-generated. This app is built to help
             you determine if a given text is written by a human or an AI language model.
+
             For reliable predictions, the minimum length of the text should be around 300 characters.
             The model accuracy is approximately 98.5% when analyzing sufficiently long texts.
+
             Please enter the text you want to analyze:
             ''')
 
