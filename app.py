@@ -1,5 +1,8 @@
 import streamlit as st
 import requests
+import pandas as pd
+
+st.sidebar.image('Logo2.png', use_column_width=True)
 
 '''
 # The AI Written Text Identifier
@@ -13,11 +16,23 @@ st.markdown(''':orange[*For reliable predictions, the minimum length of the text
 
 '''## Please enter the text you want to analyze:'''
 
-text_input = st.text_area('Text to analyze', 'This is a text that is way to short to identify reliably. You can make better predictions if you put in a text that is at least 300 characters long.',
-                          height=500
-                          )
+demo_df = pd.read_csv('demo_data.csv')
 
+def get_text():
+    sample = demo_df.sample(n=1)
+    return sample['text'].values[0], sample['AI'].values[0]
 
+if "default" not in st.session_state and "ai" not in st.session_state:
+    st.session_state["default"] = "Put your text here"
+    st.session_state["ai"] = "None"
+
+text_input = st.text_area('Text to analyze', value=st.session_state["default"], key="txt", height=500)
+
+if st.sidebar.button('Use Demo Text'):
+    st.session_state["default"], st.session_state["ai"] = get_text()
+    st.experimental_rerun()
+else:
+    st.sidebar.write('Click to use Demo Text!')
 
 url = 'https://aiwrittentextidentifier-l2scua5wbq-ey.a.run.app/predict'
 
@@ -31,7 +46,7 @@ proba = r.json()["Probability"]
 # prediction = r.json()["Prediction"]
 length = len(text_input)
 
-if st.button('Show Prediction'):
+if st.sidebar.button('Show Prediction'):
     # print is visible in the server output, not in the page
     print('Show prediction button clicked!')
     if length < 300:
@@ -44,4 +59,9 @@ if st.button('Show Prediction'):
         st.write(f'With a probability of **{round(100-proba*100,2 )}%** the text you put in is :green[*not* AI written].')
     #st.write('Further clicks are not visible but are executed')
 else:
-    st.write('Click to show the Prediction!')
+    st.sidebar.write('Click to show the Prediction!')
+
+# if st.checkbox("Show real classification"):
+#     st.write(f"The real classification is: {st.session_state['ai']}")
+# else:
+#     st.write("Check to show the real classification")
