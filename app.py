@@ -44,9 +44,7 @@ params = {
 }
 
 r = requests.get(url, params=params)
-#print(r.json())
 proba = r.json()["Probability"]
-# prediction = r.json()["Prediction"]
 length = len(text_input)
 
 if st.sidebar.button('Show Prediction'):
