@@ -29,7 +29,7 @@ if "default" not in st.session_state and "ai" not in st.session_state:
     st.session_state["default"] = "Put your text here"
     st.session_state["ai"] = "None"
 
-text_input = st.text_area('Text to analyze', value=st.session_state["default"], key="txt", height=500)
+text_input = st.text_area('Text to analyze', value=st.session_state["default"], key="txt", height=500, max_chars=2270)
 
 if st.sidebar.button('Use Demo Text'):
     st.session_state["default"], st.session_state["ai"] = get_text()
