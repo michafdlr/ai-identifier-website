@@ -14,7 +14,8 @@ st.markdown('''Identify whether a text is AI-generated or not. This app is built
 st.divider()
 
 st.markdown(''':orange[*For reliable predictions, the minimum length of the text should be around 300 characters*].
-            The model accuracy is approximately <font size="4"> **:green[98.5%]**</font> when analyzing sufficiently long texts.''',
+            The model accuracy is approximately <font size="4"> **:green[98.5%]**</font> when analyzing sufficiently long texts.
+            The maximum length of the text is 2270 characters. If you want to analyze longer texts, please split the text into several parts.''',
             unsafe_allow_html=True)
 
 '''## Please enter the text you want to analyze:'''
@@ -22,7 +23,8 @@ st.markdown(''':orange[*For reliable predictions, the minimum length of the text
 demo_df = pd.read_csv('demo_data.csv')
 
 def get_text():
-    sample = demo_df.sample(n=1)
+    demo_df["length"] = demo_df["text"].apply(lambda x: len(x))
+    sample = demo_df.loc[demo_df["length"]<=2270].sample(n=1)
     return sample['text'].values[0], sample['AI'].values[0]
 
 if "default" not in st.session_state and "ai" not in st.session_state:
@@ -43,9 +45,14 @@ params = {
     "text_input": text_input
 }
 
-r = requests.get(url, params=params)
-proba = r.json()["Probability"]
 length = len(text_input)
+
+if length > 2270:
+    st.error('Your text is too long. Please split your text into several parts', icon="🚨")
+    st.stop()
+else:
+    r = requests.get(url, params=params)
+    proba = r.json()["Probability"]
 
 if st.sidebar.button('Show Prediction'):
     # print is visible in the server output, not in the page
