@@ -8,8 +8,10 @@ st.sidebar.image('Logo2.png', use_column_width=True)
 # The AI Written Text Identifier
 '''
 
-st.markdown('''Identify whether a text is AI-generated. This app is built to help
+st.markdown('''Identify whether a text is AI-generated or not. This app is built to help
             you determine if a given text is written by a human or an AI language model.''')
+
+st.divider()
 
 st.markdown(''':orange[*For reliable predictions, the minimum length of the text should be around 300 characters*].
             The model accuracy is approximately <font size="4"> **:green[98.5%]**</font> when analyzing sufficiently long texts.''',
